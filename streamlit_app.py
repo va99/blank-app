@@ -14,7 +14,6 @@ df = pd.DataFrame(data)
 
 # Streamlit app
 st.title('Doctor Admin Dashboard')
-
 # Search form
 st.sidebar.header('Search Criteria')
 city = st.sidebar.selectbox('Select City', options=df['City'].unique())
