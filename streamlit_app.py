@@ -24,7 +24,7 @@ tpa_data = {
     "20": "Reliance General Insurance"
 }
 
-# Mock data
+#Mock data
 hospital_data = [
     {
         "hospital_name": "Kokilaben Dhirubhai Ambani Hospital",
@@ -32,7 +32,8 @@ hospital_data = [
         "address": "Rao Saheb Achutrao Patwardhan Marg, Four Bungalows, Andheri West, Mumbai, Maharashtra 400053",
         "contact_number": "+91 22 4269 6969",
         "email": "info@kokilabenhospital.com",
-        "TPAs": ["01", "02", "05", "07", "08", "10", "11"]
+        "TPAs": ["01", "02", "05", "07", "08", "10", "11"],
+        "rating": "4.1"
     },
     {
         "hospital_name": "Tata Memorial Hospital",
@@ -40,23 +41,8 @@ hospital_data = [
         "address": "Dr E Borges Road, Parel, Mumbai, Maharashtra 400012",
         "contact_number": "+91 22 2417 7000",
         "email": "info@tmc.gov.in",
-        "TPAs": ["03", "04", "06", "07", "09", "10", "12"]
-    },
-    {
-        "hospital_name": "P.D. Hinduja Hospital & Medical Research Centre",
-        "city": "Mumbai",
-        "address": "Veer Savarkar Marg, Mahim, Mumbai, Maharashtra 400016",
-        "contact_number": "+91 22 2445 2575",
-        "email": "info@hindujahospital.com",
-        "TPAs": ["01", "02", "03", "05", "08", "11", "12"]
-    },
-    {
-        "hospital_name": "Fortis Hiranandani Hospital",
-        "city": "Mumbai",
-        "address": "Mini Sea Shore Road, Sector 10A, Vashi, Navi Mumbai, Maharashtra 400703",
-        "contact_number": "+91 22 3919 9222",
-        "email": "info@fortishealthcare.com",
-        "TPAs": ["02", "04", "06", "07", "09", "10", "13"]
+        "TPAs": ["03", "04", "06", "07", "09", "10", "12"],
+        "rating": "3.8"
     },
     {
         "hospital_name": "Sir Ganga Ram Hospital",
@@ -64,7 +50,8 @@ hospital_data = [
         "address": "Rajinder Nagar, New Delhi – 110060, INDIA",
         "contact_number": "011 4225 4000",
         "email": "info@sgra.com",
-        "TPAs": ["01", "05", "06", "08", "11", "13", "16"]
+        "TPAs": ["01", "05", "06", "08", "11", "13", "16"],
+        "rating": "4.1"
     },
     {
         "hospital_name": "Indraprastha Apollo Hospital",
@@ -72,15 +59,8 @@ hospital_data = [
         "address": "Mathura Road, Delhi-110076",
         "contact_number": "1860 500 1066",
         "email": "info@apollohospitals.com",
-        "TPAs": ["02", "03", "05", "07", "09", "12", "14"]
-    },
-    {
-        "hospital_name": "Moolchand Medicity",
-        "city": "Delhi",
-        "address": "Lajpat Nagar, New Delhi, Delhi - 110024",
-        "contact_number": "011 4200 0000",
-        "email": "info@moolchand.com",
-        "TPAs": ["01", "04", "06", "08", "10", "13", "15"]
+        "TPAs": ["02", "03", "05", "07", "09", "12", "14"],
+        "rating": "4.3"
     },
     {
         "hospital_name": "Manipal Hospital",
@@ -88,15 +68,8 @@ hospital_data = [
         "address": "Sector 5, Main Sikar Road, Vidhyadhar Nagar, Jaipur, Rajasthan 302023",
         "contact_number": "+91 141 404 4444",
         "email": "info@manipalhospitals.com",
-        "TPAs": ["03", "05", "07", "08", "11", "14", "17"]
-    },
-    {
-        "hospital_name": "Fortis Escorts Hospital",
-        "city": "Jaipur",
-        "address": "Jawahar Lal Nehru Marg, Sector 5, Malviya Nagar, Jaipur, Rajasthan 302017",
-        "contact_number": "+91 141 405 5555",
-        "email": "info@fortishealthcare.com",
-        "TPAs": ["02", "04", "06", "09", "12", "16", "18"]
+        "TPAs": ["03", "05", "07", "08", "11", "14", "17"],
+        "rating": "4.1"
     },
     {
         "hospital_name": "AIIMS Jodhpur",
@@ -104,15 +77,8 @@ hospital_data = [
         "address": "Marudhar Industrial Area, 2nd Phase, M.I.A. 1st Phase, Basni, Jodhpur, Rajasthan 342005",
         "contact_number": "+91 291 2740741",
         "email": "info@aiimsjodhpur.edu.in",
-        "TPAs": ["01", "05", "07", "10", "12", "14", "19"]
-    },
-    {
-        "hospital_name": "CK Birla Hospital",
-        "city": "Jaipur",
-        "address": "Near Mahindra World City, Jaipur, Rajasthan 302018",
-        "contact_number": "+91 141 404 2000",
-        "email": "info@ckbirlahospital.com",
-        "TPAs": ["02", "03", "06", "08", "11", "15", "18"]
+        "TPAs": ["01", "05", "07", "10", "12", "14", "19"],
+        "rating": "4.1"
     },
     {
         "hospital_name": "HCG Cancer Centre",
@@ -120,7 +86,8 @@ hospital_data = [
         "address": "Science City Rd, off Sarkhej - Gandhinagar Highway, Sola, Ahmedabad, Gujarat 380060",
         "contact_number": "+91 635 888 8814",
         "email": "info@hcgoncology.com",
-        "TPAs": ["01", "03", "06", "08", "09", "13", "20"]
+        "TPAs": ["01", "03", "06", "08", "09", "13", "20"],
+        "rating": "4.1"
     },
     {
         "hospital_name": "Apollo Hospitals",
@@ -128,39 +95,8 @@ hospital_data = [
         "address": "Plot No, 1A, Gandhinagar - Ahmedabad Rd, GIDC Bhat, estate, Ahmedabad, Gujarat 382428",
         "contact_number": "+91 79 6670 1800",
         "email": "info@apollohospitals.com",
-        "TPAs": ["02", "05", "07", "10", "12", "14", "16"]
-    },
-    {
-        "hospital_name": "Sterling Hospitals",
-        "city": "Ahmedabad",
-        "address": "Sterling Hospital Rd, near Maharaja Agrasen Vidhyalaya, Memnagar, Ahmedabad, Gujarat 380052",
-        "contact_number": "+91 9898 987878",
-        "email": "info@sterlinghospitals.com",
-        "TPAs": ["04", "06", "09", "11", "13", "15", "17"]
-    },
-    {
-        "hospital_name": "Shalby Hospitals",
-        "city": "Ahmedabad",
-        "address": "Near Gujarat High Court, Ellis Bridge, Ahmedabad, Gujarat 380006",
-        "contact_number": "+91 9512 009180",
-        "email": "info@shalby.org",
-        "TPAs": ["03", "07", "08", "10", "12", "14", "18"]
-    },
-    {
-        "hospital_name": "Narayana Multispeciality Hospital",
-        "city": "Ahmedabad",
-        "address": "Nr. Chakudiya Mahadev, Rakhial Cross Road, Opp. Rakhial Police Station, Rakhial Ahmedabad, Gujarat - 380023",
-        "contact_number": "+91 80 6750 6922",
-        "email": "info@narayanahealth.org",
-        "TPAs": ["01", "05", "09", "12", "14", "17", "20"]
-    },
-    {
-        "hospital_name": "Wockhardt Hospital",
-        "city": "Surat",
-        "address": "5RM5+JJ7, R K Desai Marg Opposite Chowpatty, Athwalines, Athwa Gate, Surat, Gujarat 395001",
-        "contact_number": "+91 22 6178 4400",
-        "email": "info@wockhardthospitals.com",
-        "TPAs": ["02", "04", "06", "08", "11", "13", "19"]
+        "TPAs": ["02", "05", "07", "10", "12", "14", "16"],
+        "rating": "4.1"
     },
     {
         "hospital_name": "Aster RV Hospital",
@@ -168,18 +104,55 @@ hospital_data = [
         "address": "Sardar Patel Ring Road, Thaltej, Ahmedabad, Gujarat 380054",
         "contact_number": "+91 79 6600 0000",
         "email": "info@asterdmhealthcare.com",
-        "TPAs": ["03", "05", "07", "10", "12", "15", "16"]
+        "TPAs": ["03", "05", "07", "10", "12", "15", "16"],
+        "rating": "4.1"
     },
     {
-        "hospital_name": "Manipal Hospital",
-        "city": "Bengaluru",
-        "address": "No. 98, 1st Cross, 1st Block, Koramangala, Bengaluru, Karnataka 560034",
-        "contact_number": "+91 80 2222 2222",
-        "email": "info@manipalhospitals.com",
-        "TPAs": ["01", "02", "04", "07", "09", "14", "20"]
+        "hospital_name": "Apollo Hospitals",
+        "city": "Chennai",
+        "address": "21 Greams Lane, Off Greams Road, Chennai, Tamil Nadu 600006",
+        "contact_number": "+91 44 2829 3333",
+        "email": "info@apollohospitals.com",
+        "TPAs": ["01", "02", "03", "04", "05", "06", "07"],
+        "rating": "4.1"
+    },
+    {
+        "hospital_name": "Max Super Specialty Hospital",
+        "city": "Delhi",
+        "address": "Saket, New Delhi, Delhi 110017",
+        "contact_number": "+91 11 2651 5050",
+        "email": "info@maxhealthcare.com",
+        "TPAs": ["02", "03", "04", "05", "08", "09", "10"],
+        "rating": "4.1"
+    },
+    {
+        "hospital_name": "Shree Krishna Hospital",
+        "city": "Chhattisgarh",
+        "address": "Raipur, Chhattisgarh 492001",
+        "contact_number": "+91 771 222 3333",
+        "email": "info@shreekrishnahospital.com",
+        "TPAs": ["01", "03", "05", "07", "09", "12", "14"],
+        "rating": "4.1"
+    },
+    {
+        "hospital_name": "Paras HMRI Hospital",
+        "city": "Bihar",
+        "address": "Patna, Bihar 800001",
+        "contact_number": "+91 612 222 4444",
+        "email": "info@parashmri.com",
+        "TPAs": ["02", "04", "06", "08", "11", "13", "19"],
+        "rating": "4.1"
+    },
+    {
+        "hospital_name": "Tripura Medical College & Dr. B.R.Ambedkar Memorial Teaching Hospital",
+        "city": "Tripura",
+        "address": "Hapania, Tripura 799014",
+        "contact_number": "+91 381 222 4444",
+        "email": "info@tripuramedicalcollege.com",
+        "TPAs": ["02", "03", "06", "08", "11", "14", "16"],
+        "rating": "4.1"
     }
 ]
-
 # Streamlit app
 st.title("MedLeads")
 st.header("Welcome to MedLeads")
