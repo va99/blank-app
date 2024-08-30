@@ -153,50 +153,61 @@ hospital_data = [
         "rating": "4.1"
     }
 ]
-
 # Streamlit app
 st.title("MedLeads")
 st.header("Welcome to MedLeads")
 
-# Sidebar for dynamic filtering
+# Sidebar for selecting city
 city_selected = st.sidebar.selectbox(
-    "Select a City (Mandatory)",
+    "Select a City",
     sorted(set(hospital['city'] for hospital in hospital_data))
 )
 
-# Optional Policy (TPA) and Hospital Selection
-selected_tpa = st.sidebar.selectbox(
-    "Select a TPA (Optional)",
-    ["All"] + sorted(tpa_data.values())
-)
-
-selected_hospital = st.sidebar.selectbox(
-    "Select a Hospital (Optional)",
-    ["All"] + sorted(hospital['hospital_name'] for hospital in hospital_data if hospital['city'] == city_selected)
-)
-
-# Filtering logic based on selections
+# Filter hospitals based on the selected city
 filtered_hospitals = [hospital for hospital in hospital_data if hospital["city"] == city_selected]
 
-if selected_tpa != "All":
-    tpa_key = [k for k, v in tpa_data.items() if v == selected_tpa][0]
-    filtered_hospitals = [hospital for hospital in filtered_hospitals if tpa_key in hospital["TPAs"]]
+# Filter TPAs based on hospitals in the selected city
+available_tpas = set()
+for hospital in filtered_hospitals:
+    available_tpas.update(hospital["TPAs"])
 
-if selected_hospital != "All":
-    filtered_hospitals = [hospital for hospital in filtered_hospitals if hospital["hospital_name"] == selected_hospital]
+st.sidebar.write("### Available TPAs")
+for tpa in sorted(available_tpas):
+    st.sidebar.write(f"{tpa}: {tpa_data[tpa]}")
 
-# Display the filtered hospitals
+selected_tpa = st.sidebar.selectbox(
+    "Select a TPA",
+    sorted(available_tpas),
+    format_func=lambda x: tpa_data.get(x, "Unknown TPA")
+)
+
+# Checkbox for coverage type
+cashless = st.sidebar.checkbox("Cashless Coverage", value=True)
+non_cashless = st.sidebar.checkbox("Non-Cashless Coverage", value=True)
+
+# Filter hospitals based on the selected TPA and coverage type
+if cashless and non_cashless:
+    filtered_hospitals = [hospital for hospital in filtered_hospitals if selected_tpa in hospital["TPAs"]]
+elif cashless:
+    filtered_hospitals = [hospital for hospital in filtered_hospitals if selected_tpa in hospital["TPAs"]]
+elif non_cashless:
+    # Keep hospitals where the selected TPA is not listed for non-cashless coverage
+    filtered_hospitals = [hospital for hospital in filtered_hospitals if selected_tpa not in hospital["TPAs"]]
+
+# Display hospital information in a collapsible layout
 if not filtered_hospitals:
-    st.write("No hospitals found for the selected criteria.")
+    st.write("No hospitals found matching the criteria.")
 else:
     for hospital in filtered_hospitals:
         with st.expander(f"{hospital['hospital_name']} ({hospital['rating']}⭐️)", expanded=False):
             st.write(f"**Location:** {hospital['city']}, {hospital['address']}")
             st.write(f"**Contact:** {hospital['contact_number']} | **Email:** {hospital['email']}")
-            
-            hospital_tpas = [tpa_data[tpa] for tpa in hospital["TPAs"]]
-            st.write(f"**Available TPAs:** {', '.join(hospital_tpas)}")
-            
+
+            if cashless:
+                st.write(f"**TPA:** {tpa_data[selected_tpa]} is available for Cashless Coverage.")
+            if non_cashless:
+                st.write("**Payment Method:** CASH (Non-Cashless)")
+
             with st.form(f"patient_form_{hospital['hospital_name']}", clear_on_submit=True):
                 st.write("### Patient Information")
                 patient_name = st.text_input("Patient Name")
@@ -204,7 +215,7 @@ else:
                 patient_mobile = st.text_input("Mobile Number")
                 selected_policy = st.selectbox(
                     "Select Policy",
-                    options=hospital_tpas if selected_tpa == "All" else [selected_tpa],
+                    options=[tpa_data[selected_tpa]] if cashless else ["CASH"],
                     index=0
                 )
                 submit_button = st.form_submit_button(label="Refer Patient")
