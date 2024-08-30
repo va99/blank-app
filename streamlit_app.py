@@ -153,6 +153,13 @@ hospital_data = [
         "rating": "4.1"
     }
 ]
+# Mock referral data
+referral_data = [
+    {"hospital_name": "Kokilaben Dhirubhai Ambani Hospital", "patient_id": "P001", "patient_name": "John Doe", "status": "Completed"},
+    {"hospital_name": "Tata Memorial Hospital", "patient_id": "P002", "patient_name": "Jane Smith", "status": "Pending"},
+    {"hospital_name": "Sir Ganga Ram Hospital", "patient_id": "P003", "patient_name": "Alice Johnson", "status": "In Progress"},
+    # Add more referral data as needed
+]
 
 # Streamlit app
 st.title("MedLeads")
@@ -184,9 +191,6 @@ coverage_type = st.checkbox("Cashless Coverage", value=True)
 # Filter hospitals based on the coverage type and selected TPA
 if coverage_type:
     filtered_hospitals = [hospital for hospital in filtered_hospitals if selected_tpa in hospital["TPAs"]]
-else:
-    # No additional filter needed for non-cashless
-    pass
 
 # Display hospital information in a collapsible layout
 for hospital in filtered_hospitals:
@@ -198,12 +202,7 @@ for hospital in filtered_hospitals:
             st.write(f"**TPA:** {tpa_data[selected_tpa]} is available for Cashless Coverage.")
         else:
             st.write("**Payment Method:** CASH (Non-Cashless)")
-            # Display available TPAs for non-cashless
-            available_tpas_for_hospital = [tpa_data[tpa] for tpa in hospital["TPAs"]]
-            st.write("**Available TPAs:**")
-            for tpa in available_tpas_for_hospital:
-                st.write(f"- {tpa}")
-
+        
         with st.form(f"patient_form_{hospital['hospital_name']}", clear_on_submit=True):
             st.write("### Patient Information")
             patient_name = st.text_input("Patient Name")
@@ -217,3 +216,13 @@ for hospital in filtered_hospitals:
             submit_button = st.form_submit_button(label="Refer Patient")
             if submit_button:
                 st.success(f"Patient referral to {hospital['hospital_name']} submitted successfully.")
+
+# Referral Management Dashboard
+st.header("Referral Management Dashboard")
+
+# Display referral information in a table format
+st.write("### Referrals Overview")
+referral_df = pd.DataFrame(referral_data)
+st.dataframe(referral_df)
+
+# You might want to add functionality for sorting/filtering, or handling updates here.
