@@ -1,5 +1,5 @@
 import streamlit as st
-imoport pandas
+import pandas
 
 # Mock TPA data
 tpa_data = {
