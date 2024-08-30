@@ -53,6 +53,110 @@ hospital_data = {
         {"TPA": "20", "Coverage": "cashless"}
     ]
 }
+{
+        "Hospital ID": "H002",
+        "Name": "Lilavati Hospital, Mumbai",
+        "City": "Mumbai, Maharashtra",
+        "State": "Maharashtra",
+        "Empanelled Tie-Ups": [
+            {"TPA": "03", "Coverage": "cashless"},
+            {"TPA": "04", "Coverage": "cashless"},
+            {"TPA": "05", "Coverage": "cashless"},
+            {"TPA": "06", "Coverage": "cashless"},
+            {"TPA": "07", "Coverage": "cashless"},
+            {"TPA": "08", "Coverage": "cashless"},
+            {"TPA": "09", "Coverage": "cashless"},
+            {"TPA": "10", "Coverage": "cashless"},
+            {"TPA": "11", "Coverage": "cashless"},
+            {"TPA": "12", "Coverage": "cashless"},
+            {"TPA": "13", "Coverage": "cashless"},
+            {"TPA": "14", "Coverage": "cashless"},
+            {"TPA": "15", "Coverage": "cashless"},
+            {"TPA": "16", "Coverage": "cashless"},
+            {"TPA": "17", "Coverage": "cashless"},
+            {"TPA": "18", "Coverage": "cashless"},
+            {"TPA": "19", "Coverage": "cashless"},
+            {"TPA": "20", "Coverage": "cashless"},
+            {"TPA": "21", "Coverage": "cashless"},
+            {"TPA": "22", "Coverage": "cashless"}
+        ]
+    },
+    {
+        "Hospital ID": "H003",
+        "Name": "Narayana Health, Bengaluru",
+        "City": "Bengaluru",
+        “State": "Karnataka",
+        "Empanelled Tie-Ups": [
+            {"TPA": "05", "Coverage": "cashless"},
+            {"TPA": "06", "Coverage": "cashless"},
+            {"TPA": "07", "Coverage": "cashless"},
+            {"TPA": "08", "Coverage": "cashless"},
+            {"TPA": "09", "Coverage": "cashless"},
+            {"TPA": "10", "Coverage": "cashless"},
+            {"TPA": "11", "Coverage": "cashless"},
+            {"TPA": "12", "Coverage": "cashless"},
+            {"TPA": "13", "Coverage": "cashless"},
+            {"TPA": "14", "Coverage": "cashless"},
+            {"TPA": "15", "Coverage": "cashless"},
+            {"TPA": "16", "Coverage": "cashless"},
+            {"TPA": "17", "Coverage": "cashless"},
+            {"TPA": "18", "Coverage": "cashless"},
+            {"TPA": "19", "Coverage": "cashless"},
+            {"TPA": "20", "Coverage": "cashless"},
+            {"TPA": "21", "Coverage": "cashless"},
+            {"TPA": "22", "Coverage": "cashless"},
+            {"TPA": "23", "Coverage": "cashless"},
+            {"TPA": "24", "Coverage": "cashless"}
+        ]
+    },
+    {
+        "Hospital ID": "H004",
+        "Name": "Medanta - The Medicity",
+        "City": "Gurgaon",
+        "State": "Haryana",
+        "Empanelled Tie-Ups": [
+            {"TPA": "07", "Coverage": "cashless"},
+            {"TPA": "08", "Coverage": "cashless"},
+            {"TPA": "09", "Coverage": "cashless"},
+            {"TPA": "10", "Coverage": "cashless"},
+            {"TPA": "11", "Coverage": "cashless"},
+            {"TPA": "12", "Coverage": "cashless"},
+            {"TPA": "13", "Coverage": "cashless"},
+            {"TPA": "14", "Coverage": "cashless"},
+            {"TPA": "15", "Coverage": "cashless"},
+            {"TPA": "16", "Coverage": "cashless"},
+            {"TPA": "17", "Coverage": "cashless"},
+            {"TPA": "18", "Coverage": "cashless"},
+            {"TPA": "19", "Coverage": "cashless"},
+            {"TPA": "20", "Coverage": "cashless"},
+            {"TPA": "21", "Coverage": "cashless"},
+            {"TPA": "22", "Coverage": "cashless"},
+            {"TPA": "23", "Coverage": "cashless"},
+            {"TPA": "24", "Coverage": "cashless"},
+            {"TPA": "25", "Coverage": "cashless"},
+            {"TPA": "26", "Coverage": "cashless"}
+        ]
+    },
+    {
+        "Hospital ID": "H005",
+        "Name": "Bansal Hospital",
+        "City": "Bhopal",
+        "State": "Madhya Pradesh",
+        "Empanelled Tie-Ups": [
+            {"TPA": "03", "Coverage": "cashless"},
+            {"TPA": "04", "Coverage": "cashless"},
+            {"TPA": "19", "Coverage": "cashless"},
+            {"TPA": "33", "Coverage": "cashless"},
+            {"TPA": "34", "Coverage": "cashless"},
+            {"TPA": "35", "Coverage": "cashless"},
+            {"TPA": "11", "Coverage": "cashless"},
+            {"TPA": "27", "Coverage": "cashless"},
+            {"TPA": "09", "Coverage": "cashless"},
+            {"TPA": "15", "Coverage": "cashless"}
+        ]
+    },
+}
+
 
 # Streamlit app
 st.title("Hospital TPA Information")
