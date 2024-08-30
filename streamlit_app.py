@@ -81,6 +81,7 @@ hospital_data = {
             {"TPA": "22", "Coverage": "cashless"}
         ]
     },
+}
     {
         "Hospital ID": "H003",
         "Name": "Narayana Health, Bengaluru",
