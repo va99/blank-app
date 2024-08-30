@@ -153,6 +153,7 @@ hospital_data = [
         "rating": "4.1"
     }
 ]
+
 # Streamlit app
 st.title("MedLeads")
 st.header("Welcome to MedLeads")
@@ -197,6 +198,11 @@ for hospital in filtered_hospitals:
             st.write(f"**TPA:** {tpa_data[selected_tpa]} is available for Cashless Coverage.")
         else:
             st.write("**Payment Method:** CASH (Non-Cashless)")
+            # Display available TPAs for non-cashless
+            available_tpas_for_hospital = [tpa_data[tpa] for tpa in hospital["TPAs"]]
+            st.write("**Available TPAs:**")
+            for tpa in available_tpas_for_hospital:
+                st.write(f"- {tpa}")
 
         with st.form(f"patient_form_{hospital['hospital_name']}", clear_on_submit=True):
             st.write("### Patient Information")
