@@ -145,34 +145,30 @@ selected_tpa = st.sidebar.selectbox(
 # Switch-type toggle for coverage type
 coverage_type = st.checkbox("Cashless Coverage", value=True)
 
-# Display hospital information based on city and TPA selection
+# Display hospital information in a collapsible layout
 for hospital in filtered_hospitals:
-    st.subheader(f"{hospital['hospital_name']} ({hospital['rating']}★)")
-    
-    placeholder = st.empty()
-    with placeholder.container():
+    with st.expander(f"{hospital['hospital_name']} ({hospital['rating']}⭐️)", expanded=False):
+        st.write(f"**Location:** {hospital['city']}, {hospital['address']}")
+        st.write(f"**Contact:** {hospital['contact_number']} | **Email:** {hospital['email']}")
+
         if selected_tpa in hospital["TPAs"] or not coverage_type:
-            st.write(f"Location: {hospital['city']}, {hospital['address']}")
-            st.write(f"Contact: {hospital['contact_number']} | Email: {hospital['email']}")
-            
             if coverage_type:
-                st.write(f"TPA: {tpa_data[selected_tpa]} is available for Cashless Coverage.")
+                st.write(f"**TPA:** {tpa_data[selected_tpa]} is available for Cashless Coverage.")
             else:
-                st.write("Payment Method: CASH (Non-Cashless)")
-            
-            if st.button(f"Refer Patient to {hospital['hospital_name']}", key=hospital['hospital_name']):
-                with st.form(f"patient_form_{hospital['hospital_name']}", clear_on_submit=True):
-                    st.write("### Patient Information")
-                    patient_name = st.text_input("Patient Name")
-                    patient_age = st.number_input("Age", min_value=0, max_value=120)
-                    patient_mobile = st.text_input("Mobile Number")
-                    selected_policy = st.selectbox(
-                        "Select Policy",
-                        options=[tpa_data[selected_tpa]] if coverage_type else ["CASH"],
-                        index=0
-                    )
-                    submit_button = st.form_submit_button(label="Submit")
-                    if submit_button:
-                        st.success(f"Patient referral to {hospital['hospital_name']} submitted successfully.")
+                st.write("**Payment Method:** CASH (Non-Cashless)")
+
+            with st.form(f"patient_form_{hospital['hospital_name']}", clear_on_submit=True):
+                st.write("### Patient Information")
+                patient_name = st.text_input("Patient Name")
+                patient_age = st.number_input("Age", min_value=0, max_value=120)
+                patient_mobile = st.text_input("Mobile Number")
+                selected_policy = st.selectbox(
+                    "Select Policy",
+                    options=[tpa_data[selected_tpa]] if coverage_type else ["CASH"],
+                    index=0
+                )
+                submit_button = st.form_submit_button(label="Refer Patient")
+                if submit_button:
+                    st.success(f"Patient referral to {hospital['hospital_name']} submitted successfully.")
         else:
-            st.warning(f"{tpa_data[selected_tpa]} is not available for Cashless Coverage at this hospital.")
+            st.warning(f"**Note:** {tpa_data[selected_tpa]} is not available for Cashless Coverage at this hospital.")
