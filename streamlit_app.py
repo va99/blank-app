@@ -59,7 +59,7 @@ st.title("Hospital TPA Information")
 
 # Sidebar for selecting city and TPA
 with st.sidebar:
-    city_selected = st.selectbox("Select a City", ["New Delhi"])
+    city_selected = st.selectbox("Select a City", ["New Delhi", "Mumbai", "Bengaluru", "Chennai", "Hyderabad", "Pune", "Ahemdabad", "Jaipur", "Lucknow", "Bhopal", "Indore", "Nagpur", "Kochi"])
     tpa_ids = [tie_up['TPA'] for tie_up in hospital_data["Empanelled Tie-Ups"]]
     selected_tpa = st.selectbox("Select a TPA", tpa_ids, format_func=lambda x: tpa_data[x])
 
