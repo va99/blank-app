@@ -1,5 +1,5 @@
 import streamlit as st
-import pandas
+import pandas as pd  # Ensure pandas is imported
 
 # Mock TPA data
 tpa_data = {
@@ -154,6 +154,7 @@ hospital_data = [
         "rating": "4.1"
     }
 ]
+
 # Mock referral data
 referral_data = [
     {"hospital_name": "Kokilaben Dhirubhai Ambani Hospital", "patient_id": "P001", "patient_name": "John Doe", "status": "Completed"},
