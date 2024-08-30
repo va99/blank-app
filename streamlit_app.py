@@ -23,7 +23,6 @@ tpa_data = {
     "19": "Bajaj Allianz",
     "20": "Reliance General Insurance"
 }
-
 # Mock Hospital Data
 hospital_data = {
     "H001": {
