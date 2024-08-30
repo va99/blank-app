@@ -24,7 +24,7 @@ tpa_data = {
     "20": "Reliance General Insurance"
 }
 
-#Mock Hospital Data
+# Mock Hospital Data
 hospital_data = {
     "H001": {
         "Name": "Max Super Specialty Hospital, Saket",
@@ -76,24 +76,41 @@ st.title("Hospital TPA Information")
 
 # Sidebar for selecting city and TPA
 with st.sidebar:
-    city_selected = st.selectbox("Select a City", ["New Delhi", "Mumbai", "Bengaluru", "Chennai", "Hyderabad", "Pune", "Ahemdabad", "Jaipur", "Lucknow", "Bhopal", "Indore", "Nagpur", "Kochi"])
-    tpa_ids = [tie_up['TPA'] for tie_up in hospital_data["Empanelled Tie-Ups"]]
-    selected_tpa = st.selectbox("Select a TPA", tpa_ids, format_func=lambda x: tpa_data[x])
+    city_selected = st.selectbox(
+        "Select a City",
+        ["New Delhi", "Mumbai", "Gurgaon", "Bhopal"]
+    )
+    
+    # Filter TPAs based on hospitals in the selected city
+    available_tpas = set()
+    for hospital in hospital_data.values():
+        if hospital["Location"]["City"] == city_selected:
+            available_tpas.update(hospital["Empanelled Tie-Ups"]["cashless"])
+    
+    selected_tpa = st.selectbox(
+        "Select a TPA",
+        list(available_tpas),
+        format_func=lambda x: tpa_data.get(x, "Unknown TPA")
+    )
 
 # Toggle switch for coverage type
-coverage_type = st.radio("Coverage Type", options=["Cashless", "Non-Cashless"], index=0, horizontal=True)
+coverage_type = st.radio(
+    "Coverage Type", 
+    options=["Cashless", "Non-Cashless"], 
+    index=0, 
+    horizontal=True
+)
 
-# Display hospital information if the city matches
-if hospital_data["City"] == city_selected:
-    st.header(hospital_data["Name"])
-    st.subheader(f"Location: {hospital_data['City']}, {hospital_data['State']}")
-    
-    # Filter based on the coverage type
-    selected_coverage = "cashless" if coverage_type == "Cashless" else "non-cashless"
-    tie_up = next((tie_up for tie_up in hospital_data["Empanelled Tie-Ups"] if tie_up["TPA"] == selected_tpa and tie_up["Coverage"] == selected_coverage), None)
-    
-    if tie_up:
-        st.subheader("Empanelled TPA Details")
-        st.write(f"TPA: {tpa_data[selected_tpa]}")
-    else:
-        st.write(f"This hospital does not offer {coverage_type.lower()} coverage with {tpa_data[selected_tpa]}.")
+# Display hospital information based on city and TPA selection
+for hospital_id, hospital in hospital_data.items():
+    if hospital["Location"]["City"] == city_selected:
+        st.header(hospital["Name"])
+        st.subheader(f"Location: {hospital['Location']['City']}, {hospital['Location']['State']}")
+        
+        selected_coverage = "cashless" if coverage_type == "Cashless" else "non-cashless"
+        
+        if selected_coverage in hospital["Empanelled Tie-Ups"] and selected_tpa in hospital["Empanelled Tie-Ups"][selected_coverage]:
+            st.subheader("Empanelled TPA Details")
+            st.write(f"TPA: {tpa_data[selected_tpa]}")
+        else:
+            st.write(f"This hospital does not offer {coverage_type.lower()} coverage with {tpa_data[selected_tpa]}.")
