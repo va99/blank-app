@@ -4,7 +4,7 @@ import streamlit as st
 tpa_data = {
     "01": "Medi Assist",
     "02": "Paramount Health Services",
-    "03": "FHPL (Family Health Plan Limited",
+    "03": "FHPL (Family Health Plan Limited)",
     "04": "Health India TPA",
     "05": "Star Health",
     "06": "Apollo Munich",
@@ -94,11 +94,13 @@ if 'doctor_name' not in st.session_state:
         submit_button = st.form_submit_button(label="Submit")
 
         if submit_button:
+            # Save doctor details to session state
             st.session_state.doctor_name = doctor_name
             st.session_state.email = email
             st.session_state.mobile_number = mobile_number
             st.session_state.license_id = license_id
             st.session_state.specialty = specialty
+            # Redirect to the main app view
             st.experimental_rerun()
 else:
     st.header(f"Hello {st.session_state.doctor_name}")
