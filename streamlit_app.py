@@ -57,27 +57,22 @@ hospital_data = {
 # Streamlit app
 st.title("Hospital TPA Information")
 
-# Dropdown to select a city
-city_selected = st.selectbox("Select a City", ["New Delhi"])
-
-# Dropdown to select a TPA
-tpa_ids = [tie_up['TPA'] for tie_up in hospital_data["Empanelled Tie-Ups"]]
-selected_tpa = st.selectbox("Select a TPA", tpa_ids)
-
-# Get TPA name from selected ID
-tpa_name = tpa_data.get(selected_tpa, "Unknown TPA")
+# Sidebar for selecting city and TPA
+with st.sidebar:
+    city_selected = st.selectbox("Select a City", ["New Delhi"])
+    tpa_ids = [tie_up['TPA'] for tie_up in hospital_data["Empanelled Tie-Ups"]]
+    selected_tpa = st.selectbox("Select a TPA", tpa_ids, format_func=lambda x: tpa_data[x])
 
 # Display hospital information if the city matches
 if hospital_data["City"] == city_selected:
     st.header(hospital_data["Name"])
     st.subheader(f"Location: {hospital_data['City']}, {hospital_data['State']}")
-    st.write(f"Hospital ID: {hospital_data['Hospital ID']}")
-
+    
     # Display the selected TPA and coverage information
     tie_up = next((tie_up for tie_up in hospital_data["Empanelled Tie-Ups"] if tie_up["TPA"] == selected_tpa), None)
     if tie_up:
         st.subheader("Empanelled TPA Details")
-        st.write(f"TPA: {tpa_name}")
+        st.write(f"TPA: {tpa_data[selected_tpa]}")
         st.write(f"Coverage Type: {tie_up['Coverage']}")
     else:
-        st.write(f"This hospital is not empanelled with {tpa_name}.")
+        st.write(f"This hospital is not empanelled with {tpa_data[selected_tpa]}.")
