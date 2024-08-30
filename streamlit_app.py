@@ -79,10 +79,10 @@ hospital_data = {
             {"TPA": "20", "Coverage": "cashless"},
             {"TPA": "21", "Coverage": "cashless"},
             {"TPA": "22", "Coverage": "cashless"}
-        ]
-    },
+
+     ]
 }
-    {
+{
         "Hospital ID": "H003",
         "Name": "Narayana Health, Bengaluru",
         "City": "Bengaluru",
