@@ -80,7 +80,7 @@ hospital_data = {
 }
 
 # Streamlit app
-st.title("Hospital TPA Information")
+st.title("MedLeads")
 
 # Sidebar for selecting city and TPA
 with st.sidebar:
@@ -101,13 +101,8 @@ with st.sidebar:
         format_func=lambda x: tpa_data.get(x, "Unknown TPA")
     )
 
-# Toggle switch for coverage type
-coverage_type = st.radio(
-    "Coverage Type", 
-    options=["Cashless", "Non-Cashless"], 
-    index=0, 
-    horizontal=True
-)
+# Switch-type toggle for coverage type
+coverage_type = st.checkbox("Cashless Coverage", value=True)
 
 # Display hospital information based on city and TPA selection
 for hospital_id, hospital in hospital_data.items():
@@ -116,11 +111,38 @@ for hospital_id, hospital in hospital_data.items():
         with st.expander(f"{hospital['Name']} - {hospital['Rating']}⭐"):
             st.write(f"Location: {hospital['Location']['City']}, {hospital['Location']['State']}")
             
-            selected_coverage = "cashless" if coverage_type == "Cashless" else "non-cashless"
+            selected_coverage = "cashless" if coverage_type else "non-cashless"
             
             if selected_coverage in hospital["Empanelled Tie-Ups"] and selected_tpa in hospital["Empanelled Tie-Ups"][selected_coverage]:
                 st.write(hospital["Description"])
-                if st.button(f"Refer Patient to {hospital['Name']}"):
-                    st.success("Referral process initiated.")
+                if st.button(f"Refer Patient to {hospital['Name']}", key=hospital_id):
+                    # When Refer Patient is clicked, show the patient info form
+                    with st.form(f"patient_form_{hospital_id}", clear_on_submit=True):
+                        st.write("### Patient Information")
+                        patient_name = st.text_input("Patient Name")
+                        patient_age = st.number_input("Age", min_value=0, max_value=120)
+                        patient_mobile = st.text_input("Mobile Number")
+                        insurance_partner = st.selectbox(
+                            "Insurance Partner", 
+                            [tpa_data.get(tpa) for tpa in hospital["Empanelled Tie-Ups"][selected_coverage]]
+                        )
+                        submit_button = st.form_submit_button(label="Submit")
+                        if submit_button:
+                            st.success("Patient referral submitted successfully.")
             else:
-                st.write(f"This hospital does not offer {coverage_type.lower()} coverage with {tpa_data[selected_tpa]}.")
+                st.write(f"This hospital does not offer {selected_coverage.replace('-', ' ')} coverage with {tpa_data[selected_tpa]}.")
+                # Provide a "Refer Patient" button even for non-cashless coverage
+                if st.button(f"Refer Patient to {hospital['Name']}", key=f"non_{hospital_id}"):
+                    # Show the patient info form for non-cashless as well
+                    with st.form(f"patient_form_non_{hospital_id}", clear_on_submit=True):
+                        st.write("### Patient Information")
+                        patient_name = st.text_input("Patient Name")
+                        patient_age = st.number_input("Age", min_value=0, max_value=120)
+                        patient_mobile = st.text_input("Mobile Number")
+                        insurance_partner = st.selectbox(
+                            "Insurance Partner", 
+                            [tpa_data.get(tpa) for tpa in hospital["Empanelled Tie-Ups"][selected_coverage]]
+                        )
+                        submit_button = st.form_submit_button(label="Submit")
+                        if submit_button:
+                            st.success("Patient referral submitted successfully.")
