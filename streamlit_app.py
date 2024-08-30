@@ -27,26 +27,30 @@ tpa_data = {
 # Mock Hospital Data
 hospital_data = {
     "H001": {
-        "Name": "Max Super Specialty Hospital, Saket",
+        "Name": "Max Super Specialty Hospital",
         "Location": {
             "City": "New Delhi",
             "State": "Delhi"
         },
+        "Rating": 4.5,
         "Empanelled Tie-Ups": {
             "cashless": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
                          "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
-        }
+        },
+        "Description": "A leading multi-specialty hospital with cutting-edge technology and a team of experienced doctors."
     },
     "H002": {
-        "Name": "Lilavati Hospital, Mumbai",
+        "Name": "Lilavati Hospital",
         "Location": {
             "City": "Mumbai",
             "State": "Maharashtra"
         },
+        "Rating": 4.3,
         "Empanelled Tie-Ups": {
             "cashless": ["03", "04", "05", "06", "07", "08", "09", "10", "11", "12",
                          "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"]
-        }
+        },
+        "Description": "A well-known hospital offering comprehensive healthcare services in Mumbai."
     },
     "H004": {
         "Name": "Medanta - The Medicity",
@@ -54,10 +58,12 @@ hospital_data = {
             "City": "Gurgaon",
             "State": "Haryana"
         },
+        "Rating": 4.7,
         "Empanelled Tie-Ups": {
             "cashless": ["07", "08", "09", "10", "11", "12", "13", "14", "15", "16",
                          "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"]
-        }
+        },
+        "Description": "A super-specialty hospital known for world-class treatment and modern facilities."
     },
     "H005": {
         "Name": "Bansal Hospital",
@@ -65,9 +71,11 @@ hospital_data = {
             "City": "Bhopal",
             "State": "Madhya Pradesh"
         },
+        "Rating": 4.1,
         "Empanelled Tie-Ups": {
             "cashless": ["03", "04", "19", "33", "34", "35", "11", "27", "09", "15"]
-        }
+        },
+        "Description": "A reliable healthcare provider in Bhopal with a focus on patient care and satisfaction."
     }
 }
 
@@ -104,13 +112,15 @@ coverage_type = st.radio(
 # Display hospital information based on city and TPA selection
 for hospital_id, hospital in hospital_data.items():
     if hospital["Location"]["City"] == city_selected:
-        st.header(hospital["Name"])
-        st.subheader(f"Location: {hospital['Location']['City']}, {hospital['Location']['State']}")
-        
-        selected_coverage = "cashless" if coverage_type == "Cashless" else "non-cashless"
-        
-        if selected_coverage in hospital["Empanelled Tie-Ups"] and selected_tpa in hospital["Empanelled Tie-Ups"][selected_coverage]:
-            st.subheader("Empanelled TPA Details")
-            st.write(f"TPA: {tpa_data[selected_tpa]}")
-        else:
-            st.write(f"This hospital does not offer {coverage_type.lower()} coverage with {tpa_data[selected_tpa]}.")
+        # Creating a placeholder with hospital name and rating
+        with st.expander(f"{hospital['Name']} - {hospital['Rating']}⭐"):
+            st.write(f"Location: {hospital['Location']['City']}, {hospital['Location']['State']}")
+            
+            selected_coverage = "cashless" if coverage_type == "Cashless" else "non-cashless"
+            
+            if selected_coverage in hospital["Empanelled Tie-Ups"] and selected_tpa in hospital["Empanelled Tie-Ups"][selected_coverage]:
+                st.write(hospital["Description"])
+                if st.button(f"Refer Patient to {hospital['Name']}"):
+                    st.success("Referral process initiated.")
+            else:
+                st.write(f"This hospital does not offer {coverage_type.lower()} coverage with {tpa_data[selected_tpa]}.")
