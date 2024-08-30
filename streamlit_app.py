@@ -86,7 +86,7 @@ hospital_data = {
         "Hospital ID": "H003",
         "Name": "Narayana Health, Bengaluru",
         "City": "Bengaluru",
-        “State": "Karnataka",
+        “State": "Karnataka"
         "Empanelled Tie-Ups": [
             {"TPA": "05", "Coverage": "cashless"},
             {"TPA": "06", "Coverage": "cashless"},
