@@ -101,7 +101,7 @@ if 'doctor_name' not in st.session_state:
             st.session_state.license_id = license_id
             st.session_state.specialty = specialty
             # Redirect to the main app view
-            st.experimental_rerun()
+            st.experimental_rerun()  # This will re-run the app from the top
 else:
     st.header(f"Hello {st.session_state.doctor_name}")
 
