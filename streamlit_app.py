@@ -63,16 +63,20 @@ with st.sidebar:
     tpa_ids = [tie_up['TPA'] for tie_up in hospital_data["Empanelled Tie-Ups"]]
     selected_tpa = st.selectbox("Select a TPA", tpa_ids, format_func=lambda x: tpa_data[x])
 
+# Toggle switch for coverage type
+coverage_type = st.radio("Coverage Type", options=["Cashless", "Non-Cashless"], index=0, horizontal=True)
+
 # Display hospital information if the city matches
 if hospital_data["City"] == city_selected:
     st.header(hospital_data["Name"])
     st.subheader(f"Location: {hospital_data['City']}, {hospital_data['State']}")
     
-    # Display the selected TPA and coverage information
-    tie_up = next((tie_up for tie_up in hospital_data["Empanelled Tie-Ups"] if tie_up["TPA"] == selected_tpa), None)
+    # Filter based on the coverage type
+    selected_coverage = "cashless" if coverage_type == "Cashless" else "non-cashless"
+    tie_up = next((tie_up for tie_up in hospital_data["Empanelled Tie-Ups"] if tie_up["TPA"] == selected_tpa and tie_up["Coverage"] == selected_coverage), None)
+    
     if tie_up:
         st.subheader("Empanelled TPA Details")
         st.write(f"TPA: {tpa_data[selected_tpa]}")
-        st.write(f"Coverage Type: {tie_up['Coverage']}")
     else:
-        st.write(f"This hospital is not empanelled with {tpa_data[selected_tpa]}.")
+        st.write(f"This hospital does not offer {coverage_type.lower()} coverage with {tpa_data[selected_tpa]}.")
