@@ -124,7 +124,8 @@ for hospital_id, hospital in hospital_data.items():
                         patient_mobile = st.text_input("Mobile Number")
                         insurance_partner = st.selectbox(
                             "Insurance Partner", 
-                            [tpa_data.get(tpa) for tpa in hospital["Empanelled Tie-Ups"][selected_coverage]]
+                            [tpa_data.get(tpa) for tpa in hospital["Empanelled Tie-Ups"][selected_coverage]],
+                            index=[tpa_data.get(tpa) for tpa in hospital["Empanelled Tie-Ups"][selected_coverage]].index(tpa_data.get(selected_tpa))
                         )
                         submit_button = st.form_submit_button(label="Submit")
                         if submit_button:
@@ -141,7 +142,8 @@ for hospital_id, hospital in hospital_data.items():
                         patient_mobile = st.text_input("Mobile Number")
                         insurance_partner = st.selectbox(
                             "Insurance Partner", 
-                            [tpa_data.get(tpa) for tpa in hospital["Empanelled Tie-Ups"][selected_coverage]]
+                            [tpa_data.get(tpa) for tpa in hospital["Empanelled Tie-Ups"]["cashless"]],
+                            index=[tpa_data.get(tpa) for tpa in hospital["Empanelled Tie-Ups"]["cashless"]].index(tpa_data.get(selected_tpa))
                         )
                         submit_button = st.form_submit_button(label="Submit")
                         if submit_button:
