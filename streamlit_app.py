@@ -136,20 +136,28 @@ coverage_type = st.checkbox("Cashless Coverage", value=True)
 # Display hospital information based on city and TPA selection
 for hospital in hospital_data:
     if hospital["city"] == city_selected:
-        st.subheader(f"{hospital['hospital_name']}")
-        st.write(f"Location: {hospital['city']}, {hospital['address']}")
-        st.write(f"Contact: {hospital['contact_number']} | Email: {hospital['email']}")
+        # Placeholder for hospital name and rating
+        placeholder = st.expander(f"{hospital['hospital_name']} - Rating: {hospital['rating']}/5")
+        with placeholder:
+            st.write(f"Location: {hospital['city']}, {hospital['address']}")
+            st.write(f"Contact: {hospital['contact_number']} | Email: {hospital['email']}")
 
-        if selected_tpa in hospital["TPAs"]:
-            st.write(f"TPA: {tpa_data[selected_tpa]} is available for Cashless Coverage.")
+            if coverage_type:
+                if selected_tpa in hospital["TPAs"]:
+                    st.write(f"TPA: {tpa_data[selected_tpa]} is available for Cashless Coverage.")
+                else:
+                    st.warning(f"{tpa_data[selected_tpa]} is not available for Cashless Coverage at this hospital.")
+            else:
+                st.write("Payment Method: CASH (Non-Cashless)")
+
+            # Patient referral button
             if st.button(f"Refer Patient to {hospital['hospital_name']}", key=hospital['hospital_name']):
                 with st.form(f"patient_form_{hospital['hospital_name']}", clear_on_submit=True):
                     st.write("### Patient Information")
                     patient_name = st.text_input("Patient Name")
                     patient_age = st.number_input("Age", min_value=0, max_value=120)
                     patient_mobile = st.text_input("Mobile Number")
+                    policy_selected = st.selectbox("Select Policy", [selected_tpa], index=0)
                     submit_button = st.form_submit_button(label="Submit")
                     if submit_button:
-                        st.success(f"Patient referral to {hospital['hospital_name']} submitted successfully.")
-        else:
-            st.warning(f"{tpa_data[selected_tpa]} is not available for Cashless Coverage at this hospital.")
+                        st.success(f"Patient referral to {hospital['hospital_name']} submitted successfully with policy {policy_selected}.")
