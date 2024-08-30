@@ -82,34 +82,6 @@ hospital_data = {
 
      ]
 }
-{
-        "Hospital ID": "H003",
-        "Name": "Narayana Health, Bengaluru",
-        "City": "Bengaluru",
-        “State": "Karnataka"
-        "Empanelled Tie-Ups": [
-            {"TPA": "05", "Coverage": "cashless"},
-            {"TPA": "06", "Coverage": "cashless"},
-            {"TPA": "07", "Coverage": "cashless"},
-            {"TPA": "08", "Coverage": "cashless"},
-            {"TPA": "09", "Coverage": "cashless"},
-            {"TPA": "10", "Coverage": "cashless"},
-            {"TPA": "11", "Coverage": "cashless"},
-            {"TPA": "12", "Coverage": "cashless"},
-            {"TPA": "13", "Coverage": "cashless"},
-            {"TPA": "14", "Coverage": "cashless"},
-            {"TPA": "15", "Coverage": "cashless"},
-            {"TPA": "16", "Coverage": "cashless"},
-            {"TPA": "17", "Coverage": "cashless"},
-            {"TPA": "18", "Coverage": "cashless"},
-            {"TPA": "19", "Coverage": "cashless"},
-            {"TPA": "20", "Coverage": "cashless"},
-            {"TPA": "21", "Coverage": "cashless"},
-            {"TPA": "22", "Coverage": "cashless"},
-            {"TPA": "23", "Coverage": "cashless"},
-            {"TPA": "24", "Coverage": "cashless"}
-        ]
-    },
     {
         "Hospital ID": "H004",
         "Name": "Medanta - The Medicity",
