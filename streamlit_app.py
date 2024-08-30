@@ -4,7 +4,7 @@ import streamlit as st
 tpa_data = {
     "01": "Medi Assist",
     "02": "Paramount Health Services",
-    "03": "FHPL (Family Health Plan Limited)",
+    "03": "FHPL (Family Health Plan Limited",
     "04": "Health India TPA",
     "05": "Star Health",
     "06": "Apollo Munich",
@@ -134,17 +134,14 @@ for hospital_id, hospital in hospital_data.items():
                 st.write(f"This hospital does not offer {selected_coverage.replace('-', ' ')} coverage with {tpa_data[selected_tpa]}.")
                 # Provide a "Refer Patient" button even for non-cashless coverage
                 if st.button(f"Refer Patient to {hospital['Name']}", key=f"non_{hospital_id}"):
-                    # Show the patient info form for non-cashless as well
+                    # Show the patient info form for non-cashless with "Payment Mode: CASH"
                     with st.form(f"patient_form_non_{hospital_id}", clear_on_submit=True):
                         st.write("### Patient Information")
                         patient_name = st.text_input("Patient Name")
                         patient_age = st.number_input("Age", min_value=0, max_value=120)
                         patient_mobile = st.text_input("Mobile Number")
-                        insurance_partner = st.selectbox(
-                            "Insurance Partner", 
-                            [tpa_data.get(tpa) for tpa in hospital["Empanelled Tie-Ups"]["cashless"]],
-                            index=[tpa_data.get(tpa) for tpa in hospital["Empanelled Tie-Ups"]["cashless"]].index(tpa_data.get(selected_tpa))
-                        )
+                        payment_mode = "CASH"  # Payment mode is pre-set to "CASH" for non-cashless
+                        st.write(f"Payment Mode: {payment_mode}")
                         submit_button = st.form_submit_button(label="Submit")
                         if submit_button:
                             st.success("Patient referral submitted successfully.")
