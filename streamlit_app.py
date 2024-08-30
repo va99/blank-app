@@ -24,59 +24,89 @@ tpa_data = {
     "20": "Reliance General Insurance"
 }
 # Mock Hospital Data
-hospital_data = {
-    "H001": {
-        "Name": "Max Super Specialty Hospital",
-        "Location": {
-            "City": "New Delhi",
-            "State": "Delhi"
-        },
-        "Rating": 4.5,
-        "Empanelled Tie-Ups": {
-            "cashless": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", 
-                         "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
-        },
-        "Description": "A leading multi-specialty hospital with cutting-edge technology and a team of experienced doctors."
-    },
-    "H002": {
-        "Name": "Lilavati Hospital",
-        "Location": {
-            "City": "Mumbai",
-            "State": "Maharashtra"
-        },
-        "Rating": 4.3,
-        "Empanelled Tie-Ups": {
-            "cashless": ["03", "04", "05", "06", "07", "08", "09", "10", "11", "12",
-                         "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"]
-        },
-        "Description": "A well-known hospital offering comprehensive healthcare services in Mumbai."
-    },
-    "H004": {
-        "Name": "Medanta - The Medicity",
-        "Location": {
-            "City": "Gurgaon",
-            "State": "Haryana"
-        },
-        "Rating": 4.7,
-        "Empanelled Tie-Ups": {
-            "cashless": ["07", "08", "09", "10", "11", "12", "13", "14", "15", "16",
-                         "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"]
-        },
-        "Description": "A super-specialty hospital known for world-class treatment and modern facilities."
-    },
-    "H005": {
-        "Name": "Bansal Hospital",
-        "Location": {
-            "City": "Bhopal",
-            "State": "Madhya Pradesh"
-        },
-        "Rating": 4.1,
-        "Empanelled Tie-Ups": {
-            "cashless": ["03", "04", "19", "33", "34", "35", "11", "27", "09", "15"]
-        },
-        "Description": "A reliable healthcare provider in Bhopal with a focus on patient care and satisfaction."
-    }
-}
+[
+  {
+    "hospital_name": "Paras Hospitals",
+    "city": "Gurgaon",
+    "address": "C-1, Sushant Lok-1, Sector-43, Phase-I, Gurgaon, Haryana - 122002",
+    "contact_number": "+91 124 458 5555",
+    "email": "info@parashospitals.com",
+    "TPAs": ["09", "10", "11", "12", "13", "14", "15", "16", "17", "18"]
+  },
+  {
+    "hospital_name": "Columbia Asia Hospital",
+    "city": "Gurgaon",
+    "address": "Block F, Sector 23A, Palam Vihar, Gurgaon, Haryana - 122017",
+    "contact_number": "+91 124 616 5666",
+    "email": "info@columbiaasia.com",
+    "TPAs": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]
+  },
+  {
+    "hospital_name": "Max Super Speciality Hospital",
+    "city": "Gurgaon",
+    "address": "B Block, Sushant Lok I, Sector 43, Gurgaon, Haryana - 122001",
+    "contact_number": "+91 124 662 3000",
+    "email": "info@maxhealthcare.com",
+    "TPAs": ["11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+  },
+  {
+    "hospital_name": "Apollo Hospitals",
+    "city": "Chennai",
+    "address": "21, Greams Lane, Off Greams Road, Chennai - 600006",
+    "contact_number": "+91 44 2829 0200",
+    "email": "info@apollohospitals.com",
+    "TPAs": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
+  },
+  {
+    "hospital_name": "Fortis Malar Hospital",
+    "city": "Chennai",
+    "address": "52, 1st Main Road, Gandhi Nagar, Adyar, Chennai - 600020",
+    "contact_number": "+91 44 4289 2222",
+    "email": "info@fortishealthcare.com",
+    "TPAs": ["02", "03", "04", "05", "06", "07", "08", "09", "10", "11"]
+  },
+  {
+    "hospital_name": "MIOT International",
+    "city": "Chennai",
+    "address": "4/112, Mount Poonamalle High Road, Manapakkam, Chennai - 600089",
+    "contact_number": "+91 44 4200 2288",
+    "email": "info@miothospitals.com",
+    "TPAs": ["03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+  },
+  {
+    "hospital_name": "Sri Ramachandra Medical Centre",
+    "city": "Chennai",
+    "address": "No.1 Ramachandra Nagar, Porur, Chennai - 600116",
+    "contact_number": "+91 44 4592 8500",
+    "email": "info@sriramachandra.edu.in",
+    "TPAs": ["04", "05", "06", "07", "08", "09", "10", "11", "12", "13"]
+  },
+  {
+    "hospital_name": "Dr. Rela Institute & Medical Centre",
+    "city": "Chennai",
+    "address": "7, CLC Works Road, Chromepet, Chennai - 600044",
+    "contact_number": "+91 44 6666 7777",
+    "email": "info@relainstitute.com",
+    "TPAs": ["05", "06", "07", "08", "09", "10", "11", "12", "13", "14"]
+  },
+  {
+    "hospital_name": "SIMS Hospital",
+    "city": "Chennai",
+    "address": "No.1, Jawaharlal Nehru Salai, 100 Feet Road, Vadapalani, Chennai - 600026",
+    "contact_number": "+91 44 2000 2001",
+    "email": "info@simshospitals.com",
+    "TPAs": ["06", "07", "08", "09", "10", "11", "12", "13", "14", "15"]
+  },
+  {
+    "hospital_name": "Global Hospitals",
+    "city": "Chennai",
+    "address": "439, Cheran Nagar, Perumbakkam, Chennai - 600100",
+    "contact_number": "+91 44 4477 7000",
+    "email": "info@gleneaglesglobalhospitals.com",
+    "TPAs": ["07", "08", "09", "10", "11", "12", "13", "14", "15", "16"]
+  }
+]
+
 
 # Streamlit app
 st.title("MedLeads")
