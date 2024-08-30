@@ -82,7 +82,7 @@ hospital_data = {
 # Streamlit app
 st.title("MedLeads")
 
-# Doctor Registration Form
+# Check if doctor registration has been completed
 if 'doctor_name' not in st.session_state:
     st.subheader("Doctor Registration Form")
     with st.form("doctor_registration"):
