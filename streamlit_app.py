@@ -142,8 +142,8 @@ selected_tpa = st.sidebar.selectbox(
     format_func=lambda x: tpa_data.get(x, "Unknown TPA")
 )
 
-# Slider for selecting coverage type
-coverage_type = st.slider("Coverage Type", options=["Non-Cashless", "Cashless"], value="Cashless")
+# Select slider for choosing between Cashless and Non-Cashless
+coverage_type = st.select_slider("Coverage Type", options=["Non-Cashless", "Cashless"], value="Cashless")
 
 # Filter hospitals based on the coverage type
 if coverage_type == "Cashless":
@@ -170,6 +170,4 @@ for hospital in filtered_hospitals:
                 options=[tpa_data[selected_tpa]] if coverage_type == "Cashless" else ["Non-Cashless"],
                 index=0
             )
-            submit_button = st.form_submit_button(label="Refer Patient")
-            if submit_button:
-                st.success(f"Patient referral to {hospital['hospital_name']} submitted successfully.")
+            submit_button = st.form_submit_button(label
