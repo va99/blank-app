@@ -32,7 +32,8 @@ hospital_data = [
         "address": "C-1, Sushant Lok-1, Sector-43, Phase-I, Gurgaon, Haryana - 122002",
         "contact_number": "+91 124 458 5555",
         "email": "info@parashospitals.com",
-        "TPAs": ["09", "10", "11", "12", "13", "14", "15", "16", "17", "18"]
+        "TPAs": ["09", "10", "11", "12", "13", "14", "15", "16", "17", "18"],
+        "rating": 4.3
     },
     {
         "hospital_name": "Columbia Asia Hospital",
@@ -40,7 +41,8 @@ hospital_data = [
         "address": "Block F, Sector 23A, Palam Vihar, Gurgaon, Haryana - 122017",
         "contact_number": "+91 124 616 5666",
         "email": "info@columbiaasia.com",
-        "TPAs": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]
+        "TPAs": ["10", "11", "12", "13", "14", "15", "16", "17", "18", "19"],
+        "rating": 4.1
     },
     {
         "hospital_name": "Max Super Speciality Hospital",
@@ -48,7 +50,8 @@ hospital_data = [
         "address": "B Block, Sushant Lok I, Sector 43, Gurgaon, Haryana - 122001",
         "contact_number": "+91 124 662 3000",
         "email": "info@maxhealthcare.com",
-        "TPAs": ["11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+        "TPAs": ["11", "12", "13", "14", "15", "16", "17", "18", "19", "20"],
+        "rating": 4.4
     },
     {
         "hospital_name": "Apollo Hospitals",
@@ -56,7 +59,8 @@ hospital_data = [
         "address": "21, Greams Lane, Off Greams Road, Chennai - 600006",
         "contact_number": "+91 44 2829 0200",
         "email": "info@apollohospitals.com",
-        "TPAs": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
+        "TPAs": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+        "rating": 4.6
     },
     {
         "hospital_name": "Fortis Malar Hospital",
@@ -64,7 +68,8 @@ hospital_data = [
         "address": "52, 1st Main Road, Gandhi Nagar, Adyar, Chennai - 600020",
         "contact_number": "+91 44 4289 2222",
         "email": "info@fortishealthcare.com",
-        "TPAs": ["02", "03", "04", "05", "06", "07", "08", "09", "10", "11"]
+        "TPAs": ["02", "03", "04", "05", "06", "07", "08", "09", "10", "11"],
+        "rating": 4.2
     },
     {
         "hospital_name": "MIOT International",
@@ -72,7 +77,8 @@ hospital_data = [
         "address": "4/112, Mount Poonamalle High Road, Manapakkam, Chennai - 600089",
         "contact_number": "+91 44 4200 2288",
         "email": "info@miothospitals.com",
-        "TPAs": ["03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+        "TPAs": ["03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+        "rating": 4.5
     },
     {
         "hospital_name": "Sri Ramachandra Medical Centre",
@@ -80,7 +86,8 @@ hospital_data = [
         "address": "No.1 Ramachandra Nagar, Porur, Chennai - 600116",
         "contact_number": "+91 44 4592 8500",
         "email": "info@sriramachandra.edu.in",
-        "TPAs": ["04", "05", "06", "07", "08", "09", "10", "11", "12", "13"]
+        "TPAs": ["04", "05", "06", "07", "08", "09", "10", "11", "12", "13"],
+        "rating": 4.3
     },
     {
         "hospital_name": "Dr. Rela Institute & Medical Centre",
@@ -88,7 +95,8 @@ hospital_data = [
         "address": "7, CLC Works Road, Chromepet, Chennai - 600044",
         "contact_number": "+91 44 6666 7777",
         "email": "info@relainstitute.com",
-        "TPAs": ["05", "06", "07", "08", "09", "10", "11", "12", "13", "14"]
+        "TPAs": ["05", "06", "07", "08", "09", "10", "11", "12", "13", "14"],
+        "rating": 4.4
     },
     {
         "hospital_name": "SIMS Hospital",
@@ -96,7 +104,8 @@ hospital_data = [
         "address": "No.1, Jawaharlal Nehru Salai, 100 Feet Road, Vadapalani, Chennai - 600026",
         "contact_number": "+91 44 2000 2001",
         "email": "info@simshospitals.com",
-        "TPAs": ["06", "07", "08", "09", "10", "11", "12", "13", "14", "15"]
+        "TPAs": ["06", "07", "08", "09", "10", "11", "12", "13", "14", "15"],
+        "rating": 4.1
     },
     {
         "hospital_name": "Global Hospitals",
@@ -104,7 +113,8 @@ hospital_data = [
         "address": "439, Cheran Nagar, Perumbakkam, Chennai - 600100",
         "contact_number": "+91 44 4477 7000",
         "email": "info@gleneaglesglobalhospitals.com",
-        "TPAs": ["07", "08", "09", "10", "11", "12", "13", "14", "15", "16"]
+        "TPAs": ["07", "08", "09", "10", "11", "12", "13", "14", "15", "16"],
+        "rating": 4.2
     }
 ]
 
@@ -118,11 +128,13 @@ city_selected = st.sidebar.selectbox(
     sorted(set(hospital['city'] for hospital in hospital_data))
 )
 
+# Filter hospitals based on the selected city
+filtered_hospitals = [hospital for hospital in hospital_data if hospital["city"] == city_selected]
+
 # Filter TPAs based on hospitals in the selected city
 available_tpas = set()
-for hospital in hospital_data:
-    if hospital["city"] == city_selected:
-        available_tpas.update(hospital["TPAs"])
+for hospital in filtered_hospitals:
+    available_tpas.update(hospital["TPAs"])
 
 selected_tpa = st.sidebar.selectbox(
     "Select a TPA",
@@ -134,30 +146,33 @@ selected_tpa = st.sidebar.selectbox(
 coverage_type = st.checkbox("Cashless Coverage", value=True)
 
 # Display hospital information based on city and TPA selection
-for hospital in hospital_data:
-    if hospital["city"] == city_selected:
-        # Placeholder for hospital name and rating
-        placeholder = st.expander(f"{hospital['hospital_name']} - Rating: {hospital['rating']}/5")
-        with placeholder:
+for hospital in filtered_hospitals:
+    st.subheader(f"{hospital['hospital_name']} ({hospital['rating']}★)")
+    
+    placeholder = st.empty()
+    with placeholder.container():
+        if selected_tpa in hospital["TPAs"] or not coverage_type:
             st.write(f"Location: {hospital['city']}, {hospital['address']}")
             st.write(f"Contact: {hospital['contact_number']} | Email: {hospital['email']}")
-
+            
             if coverage_type:
-                if selected_tpa in hospital["TPAs"]:
-                    st.write(f"TPA: {tpa_data[selected_tpa]} is available for Cashless Coverage.")
-                else:
-                    st.warning(f"{tpa_data[selected_tpa]} is not available for Cashless Coverage at this hospital.")
+                st.write(f"TPA: {tpa_data[selected_tpa]} is available for Cashless Coverage.")
             else:
                 st.write("Payment Method: CASH (Non-Cashless)")
-
-            # Patient referral button
+            
             if st.button(f"Refer Patient to {hospital['hospital_name']}", key=hospital['hospital_name']):
                 with st.form(f"patient_form_{hospital['hospital_name']}", clear_on_submit=True):
                     st.write("### Patient Information")
                     patient_name = st.text_input("Patient Name")
                     patient_age = st.number_input("Age", min_value=0, max_value=120)
                     patient_mobile = st.text_input("Mobile Number")
-                    policy_selected = st.selectbox("Select Policy", [selected_tpa], index=0)
+                    selected_policy = st.selectbox(
+                        "Select Policy",
+                        options=[tpa_data[selected_tpa]] if coverage_type else ["CASH"],
+                        index=0
+                    )
                     submit_button = st.form_submit_button(label="Submit")
                     if submit_button:
-                        st.success(f"Patient referral to {hospital['hospital_name']} submitted successfully with policy {policy_selected}.")
+                        st.success(f"Patient referral to {hospital['hospital_name']} submitted successfully.")
+        else:
+            st.warning(f"{tpa_data[selected_tpa]} is not available for Cashless Coverage at this hospital.")
