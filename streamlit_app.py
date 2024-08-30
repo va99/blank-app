@@ -42,7 +42,7 @@ hospital_data = [
         "contact_number": "+91 22 2417 7000",
         "email": "info@tmc.gov.in",
         "TPAs": ["03", "04", "06", "07", "09", "10", "12"],
-        "rating": "3.8"
+        "rating": "4.1"
     },
     {
         "hospital_name": "Sir Ganga Ram Hospital",
@@ -60,7 +60,7 @@ hospital_data = [
         "contact_number": "1860 500 1066",
         "email": "info@apollohospitals.com",
         "TPAs": ["02", "03", "05", "07", "09", "12", "14"],
-        "rating": "4.3"
+        "rating": "4.1"
     },
     {
         "hospital_name": "Manipal Hospital",
@@ -153,62 +153,60 @@ hospital_data = [
         "rating": "4.1"
     }
 ]
+
 # Streamlit app
 st.title("MedLeads")
 st.header("Welcome to MedLeads")
 
-# Sidebar for selecting city and TPA
+# Sidebar for dynamic filtering
 city_selected = st.sidebar.selectbox(
-    "Select a City",
+    "Select a City (Mandatory)",
     sorted(set(hospital['city'] for hospital in hospital_data))
 )
 
-# Filter hospitals based on the selected city
-filtered_hospitals = [hospital for hospital in hospital_data if hospital["city"] == city_selected]
-
-# Filter TPAs based on hospitals in the selected city
-available_tpas = set()
-for hospital in filtered_hospitals:
-    available_tpas.update(hospital["TPAs"])
-
+# Optional Policy (TPA) and Hospital Selection
 selected_tpa = st.sidebar.selectbox(
-    "Select a TPA",
-    sorted(available_tpas),
-    format_func=lambda x: tpa_data.get(x, "Unknown TPA")
+    "Select a TPA (Optional)",
+    ["All"] + sorted(tpa_data.values())
 )
 
-# Switch-type toggle for coverage type
-coverage_type = st.checkbox("Cashless Coverage", value=True)
+selected_hospital = st.sidebar.selectbox(
+    "Select a Hospital (Optional)",
+    ["All"] + sorted(hospital['hospital_name'] for hospital in hospital_data if hospital['city'] == city_selected)
+)
 
-# Filter hospitals based on the coverage type and selected TPA
-if coverage_type:
-    filtered_hospitals = [hospital for hospital in filtered_hospitals if selected_tpa in hospital["TPAs"]]
+# Filtering logic based on selections
+filtered_hospitals = [hospital for hospital in hospital_data if hospital["city"] == city_selected]
+
+if selected_tpa != "All":
+    tpa_key = [k for k, v in tpa_data.items() if v == selected_tpa][0]
+    filtered_hospitals = [hospital for hospital in filtered_hospitals if tpa_key in hospital["TPAs"]]
+
+if selected_hospital != "All":
+    filtered_hospitals = [hospital for hospital in filtered_hospitals if hospital["hospital_name"] == selected_hospital]
+
+# Display the filtered hospitals
+if not filtered_hospitals:
+    st.write("No hospitals found for the selected criteria.")
 else:
-    # No additional filter needed for non-cashless
-    pass
-
-# Display hospital information in a collapsible layout
-for hospital in filtered_hospitals:
-    with st.expander(f"{hospital['hospital_name']} ({hospital['rating']}⭐️)", expanded=False):
-        st.write(f"**Location:** {hospital['city']}, {hospital['address']}")
-        st.write(f"**Contact:** {hospital['contact_number']} | **Email:** {hospital['email']}")
-
-        if coverage_type:
-            st.write(f"**TPA:** {tpa_data[selected_tpa]} is available for Cashless Coverage.")
-        else:
-            st.write("**Payment Method:** CASH (Non-Cashless)")
-
-        with st.form(f"patient_form_{hospital['hospital_name']}", clear_on_submit=True):
-            st.write("### Patient Information")
-            patient_name = st.text_input("Patient Name")
-            patient_age = st.number_input("Age", min_value=0, max_value=120)
-            patient_mobile = st.text_input("Mobile Number")
-            selected_policy = st.selectbox(
-                "Select Policy",
-                options=[tpa_data[selected_tpa]] if coverage_type else ["CASH"],
-                index=0
-            )
-            submit_button = st.form_submit_button(label="Refer Patient")
-            if submit_button:
-                st.success(f"Patient referral to {hospital['hospital_name']} submitted successfully.")
-
+    for hospital in filtered_hospitals:
+        with st.expander(f"{hospital['hospital_name']} ({hospital['rating']}⭐️)", expanded=False):
+            st.write(f"**Location:** {hospital['city']}, {hospital['address']}")
+            st.write(f"**Contact:** {hospital['contact_number']} | **Email:** {hospital['email']}")
+            
+            hospital_tpas = [tpa_data[tpa] for tpa in hospital["TPAs"]]
+            st.write(f"**Available TPAs:** {', '.join(hospital_tpas)}")
+            
+            with st.form(f"patient_form_{hospital['hospital_name']}", clear_on_submit=True):
+                st.write("### Patient Information")
+                patient_name = st.text_input("Patient Name")
+                patient_age = st.number_input("Age", min_value=0, max_value=120)
+                patient_mobile = st.text_input("Mobile Number")
+                selected_policy = st.selectbox(
+                    "Select Policy",
+                    options=hospital_tpas if selected_tpa == "All" else [selected_tpa],
+                    index=0
+                )
+                submit_button = st.form_submit_button(label="Refer Patient")
+                if submit_button:
+                    st.success(f"Patient referral to {hospital['hospital_name']} submitted successfully.")
