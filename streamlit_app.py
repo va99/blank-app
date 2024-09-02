@@ -1,5 +1,5 @@
 import streamlit as st
-import pandas as pd  # Ensure pandas is imported
+import pandas as pd
 
 # Mock TPA data
 tpa_data = {
@@ -155,13 +155,6 @@ hospital_data = [
     }
 ]
 
-# Mock referral data
-referral_data = [
-    {"hospital_name": "Kokilaben Dhirubhai Ambani Hospital", "patient_id": "P001", "patient_name": "John Doe", "status": "Completed"},
-    {"hospital_name": "Tata Memorial Hospital", "patient_id": "P002", "patient_name": "Jane Smith", "status": "Pending"},
-    {"hospital_name": "Sir Ganga Ram Hospital", "patient_id": "P003", "patient_name": "Alice Johnson", "status": "In Progress"},
-    # Add more referral data as needed
-]
 
 # Streamlit app
 st.title("MedLeads")
@@ -204,27 +197,35 @@ for hospital in filtered_hospitals:
             st.write(f"**TPA:** {tpa_data[selected_tpa]} is available for Cashless Coverage.")
         else:
             st.write("**Payment Method:** CASH (Non-Cashless)")
-        
+
+        # All policies list
+        all_policies = [tpa_data[code] for code in tpa_data]
+        default_policy = tpa_data.get(selected_tpa, "CASH")
+
         with st.form(f"patient_form_{hospital['hospital_name']}", clear_on_submit=True):
             st.write("### Patient Information")
             patient_name = st.text_input("Patient Name")
             patient_age = st.number_input("Age", min_value=0, max_value=120)
             patient_mobile = st.text_input("Mobile Number")
+            
+            # Select Policy dropdown with default to filtered policy
             selected_policy = st.selectbox(
                 "Select Policy",
-                options=[tpa_data[selected_tpa]] if coverage_type else ["CASH"],
-                index=0
+                options=all_policies,
+                index=all_policies.index(default_policy) if default_policy in all_policies else 0
             )
             submit_button = st.form_submit_button(label="Refer Patient")
             if submit_button:
                 st.success(f"Patient referral to {hospital['hospital_name']} submitted successfully.")
 
-# Referral Management Dashboard
-st.header("Referral Management Dashboard")
+# Balance Section
+st.header("Balance")
 
-# Display referral information in a table format
-st.write("### Referrals Overview")
-referral_df = pd.DataFrame(referral_data)
-st.dataframe(referral_df)
+# Assuming the user has referred 137 patients and makes $25 per patient
+number_of_patients_referred = 137
+earnings_per_patient = 25
+total_earnings = number_of_patients_referred * earnings_per_patient
 
-# You might want to add functionality for sorting/filtering, or handling updates here.
+st.write(f"**Number of Patients Referred:** {number_of_patients_referred}")
+st.write(f"**Average Earnings per Patient:** ${earnings_per_patient}")
+st.write(f"**Total Earnings:** ${total_earnings}")
