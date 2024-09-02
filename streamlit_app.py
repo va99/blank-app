@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 
 # Mock TPA data
 tpa_data = {
@@ -221,11 +220,10 @@ for hospital in filtered_hospitals:
 # Balance Section
 st.header("Balance")
 
-# Assuming the user has referred 137 patients and makes $25 per patient
-number_of_patients_referred = 137
-earnings_per_patient = 25
+# Display balance with mock data
+number_of_patients_referred = 130
+earnings_per_patient = 1800
 total_earnings = number_of_patients_referred * earnings_per_patient
 
-st.write(f"**Number of Patients Referred:** {number_of_patients_referred}")
-st.write(f"**Average Earnings per Patient:** ${earnings_per_patient}")
-st.write(f"**Total Earnings:** ${total_earnings}")
+st.write(f"**Balance:** ₹{total_earnings}")
+st.button("Withdraw")  # Mock withdraw button
